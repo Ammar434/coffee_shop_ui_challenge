@@ -1,0 +1,60 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "coffe_shop_ui_challenge",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "coffe_shop_ui_challenge (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "coffe_shop_ui_challenge (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "sdk gphone64 arm64",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554",
+        },
+        {
+            "name": "iPhone SE (3rd generation)",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "8F945C3B-F30F-426C-A212-98AD5550B416",
+        },
+        {
+            "name": "iPhone 15",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "FAC2C55F-A9CF-41CC-AA5A-93D1535064C5",
+        },
+        {
+            "name": "iPhone 15 Pro Max",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "25522524-85FC-4EEF-B86C-BD96A6A82CC1",
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All devices",
+            "configurations": [
+                // "sdk gphone64 arm64",
+                "iPhone SE (3rd generation)",
+                "iPhone 15",
+                "iPhone 15 Pro Max"
+            ]
+        }
+    ]
+}
