@@ -1,8 +1,8 @@
-import 'components/custom_app_bar.dart';
-import 'components/search_widget.dart';
-import '../../../../utils/constants.dart';
-import '../../../../widgets/highlighted_text.dart';
-import '../../../../widgets/small_padding.dart';
+import 'custom_app_bar.dart';
+import 'search_widget.dart';
+import '../../../utils/constants.dart';
+import '../../../widgets/highlighted_text.dart';
+import '../../../widgets/small_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

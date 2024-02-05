@@ -1,19 +1,23 @@
-import '../utils/colors.dart';
-import '../utils/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/colors.dart';
+import '../utils/constants.dart';
+
 class Pending extends StatelessWidget {
-  const Pending({super.key});
+  const Pending({super.key, this.isAppBarVisible = true});
+  final bool isAppBarVisible;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Coming Soon',
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.black,
-                )),
-      ),
+      appBar: isAppBarVisible
+          ? AppBar(
+              title: Text('Coming Soon',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.black,
+                      )),
+            )
+          : null,
       body: Padding(
         padding: EdgeInsets.all(kPadding),
         child: const Column(

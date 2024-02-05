@@ -6,77 +6,143 @@ import '../../models/coffee.dart';
 import '../../provider/order_provider.dart';
 import '../../utils/colors.dart';
 import '../../utils/constants.dart';
+import '../../utils/snackbar.dart';
 import '../../widgets/icon_svg.dart';
+import '../../widgets/pending.dart';
 import '../../widgets/small_padding.dart';
+import '../map_screen/map_screen.dart';
+import 'components/add_note_to_order.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key, required this.coffee});
   final Coffee coffee;
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<OrderProvider>(context, listen: false).setPrice(coffee.price);
+      Provider.of<OrderProvider>(context, listen: false).setBagPrice();
+    });
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         bottomNavigationBar: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          // padding: const EdgeInsets.symmetric(vertical: kPadding, horizontal: kPadding * 1.5),
+          padding: EdgeInsets.only(
+            bottom: kPadding * 2,
+            left: kPadding * 1.5,
+            right: kPadding * 1.5,
+            top: kPadding,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24.sp),
+              topRight: Radius.circular(24.sp),
+            ),
             boxShadow: [
-              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 1),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 2,
+              ),
             ],
           ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-            child: BottomAppBar(
-              child: Column(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(
-                            10,
+                  IconSvg(
+                    svgPath: 'assets/icons/money.svg',
+                    size: iconSize * 1.4,
+                    color: primaryColor,
+                  ),
+                  smallPaddingHorizontal,
+                  Container(
+                    height: 30.sp,
+                    decoration: ShapeDecoration(
+                      color: scaffoldColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 30.sp,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: kPadding,
                           ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Total payment',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                          decoration: ShapeDecoration(
+                            color: primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(kRadius),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Cash',
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Colors.white,
+                                  ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.pink,
-                          borderRadius: BorderRadius.circular(
-                            10,
-                          ),
-                        ),
-                        child: const Center(
+                        smallPaddingHorizontal,
+                        Center(
                           child: Text(
-                            'Checkout',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            '\$ ${Provider.of<OrderProvider>(context).total.toStringAsFixed(2)}',
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                         ),
+                        smallPaddingHorizontal,
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () => showSnackBarBuildLater(context),
+                    child: Container(
+                      height: 20.sp,
+                      width: 20.sp,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey,
                       ),
-                    ],
-                  )
+                      child: Icon(
+                        Icons.more_horiz,
+                        color: Colors.white,
+                        size: 20.sp,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const MapScreen()));
+                },
+                child: Container(
+                  margin: EdgeInsets.symmetric(
+                    vertical: kPadding * 1,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: kPadding * 1.2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: kBorderRadius,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Add to cart",
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Colors.white,
+                          ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         appBar: AppBar(
@@ -117,65 +183,104 @@ class OrderScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Column(
-              children: [
-                paddingVertical,
-                TopPart(
-                  imageUrl: coffee.imageUrl,
-                ),
-                Divider(
-                  color: Colors.grey[200],
-                  thickness: 5.sp,
-                ),
-                const Column(
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    DiscountBox(),
-                    Text(
-                      "Payment summary",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    paddingVertical,
+                    TopPart(
+                      imageUrl: coffee.imageUrl,
                     ),
-                    SizedBox(
-                      height: 10,
+                    Divider(
+                      color: Colors.grey[200],
+                      thickness: 5.sp,
                     ),
-                    Row(
-                      children: [
-                        Text("Price"),
-                        Spacer(),
-                        Text("\$0.00"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("Price"),
-                        Spacer(),
-                        Text(
-                          "\$0.00",
-                          style: TextStyle(decoration: TextDecoration.lineThrough),
-                        ),
-                        Text("\$0.00"),
-                      ],
-                    ),
-                    Divider(),
-                    Row(
-                      children: [
-                        Text("Total payment"),
-                        Spacer(),
-                        Text(
-                          "\$0.00",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                    const DiscountBox(),
+                    const PaymentSummary()
                   ],
-                )
-              ],
+                ),
+              ),
             ),
-            const Center(
-              child: Text('Advanced'),
+            const Pending(
+              isAppBarVisible: false,
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class PaymentSummary extends StatelessWidget {
+  const PaymentSummary({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<OrderProvider>(
+      builder: (BuildContext context, OrderProvider orderProvider, Widget? child) {
+        return Padding(
+          padding: EdgeInsets.all(kPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Payment summary",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              paddingVertical,
+              Row(
+                children: [
+                  Text(
+                    "Price",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const Spacer(),
+                  Text(
+                    "\$ ${orderProvider.bagPrice.toStringAsFixed(2)}",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
+              smallPaddingVertical,
+              Row(
+                children: [
+                  Text(
+                    "Price",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const Spacer(),
+                  Text(
+                    "\$2.00",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(decoration: TextDecoration.lineThrough, fontWeight: FontWeight.w400),
+                  ),
+                  smallPaddingHorizontal,
+                  Text(
+                    "\$1.00",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  Text(
+                    "Total payment",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const Spacer(),
+                  Text(
+                    "\$ ${orderProvider.total.toStringAsFixed(2)}",
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -187,41 +292,46 @@ class DiscountBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50.sp,
-      margin: EdgeInsets.symmetric(
-        horizontal: kPadding * 1,
-        vertical: kPadding,
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: kSmallPadding,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          kRadius,
+    return GestureDetector(
+      onTap: () => showSnackBarBuildLater(context),
+      child: Container(
+        height: 50.sp,
+        margin: EdgeInsets.symmetric(
+          horizontal: kPadding * 1,
+          vertical: kPadding,
         ),
-        border: Border.all(
-          color: Colors.grey,
+        padding: EdgeInsets.symmetric(
+          horizontal: kSmallPadding,
         ),
-      ),
-      child: Row(
-        children: [
-          IconSvg(
-            svgPath: 'assets/icons/discount.svg',
-            size: iconSize * 1.5,
-            color: primaryColor,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            kRadius,
           ),
-          smallPaddingHorizontal,
-          Text(
-            'One discount is applied',
-            style: Theme.of(context).textTheme.bodyMedium,
+          border: Border.all(
+            color: Colors.grey,
           ),
-          const Spacer(),
-          Icon(
-            Icons.arrow_forward_ios,
-            size: iconSize,
-          ),
-        ],
+        ),
+        child: Row(
+          children: [
+            IconSvg(
+              svgPath: 'assets/icons/discount.svg',
+              size: iconSize * 1.5,
+              color: primaryColor,
+            ),
+            smallPaddingHorizontal,
+            Text(
+              'One discount is applied',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const Spacer(),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: iconSize,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -262,17 +372,24 @@ class TopPart extends StatelessWidget {
           Row(
             children: [
               StadiumButton(
-                onTap: () {},
+                onTap: () => showSnackBarBuildLater(context),
                 title: 'Edit address',
                 svgPath: 'assets/icons/edit.svg',
               ),
               paddingHorizontal,
               StadiumButton(
-                onTap: () {},
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const AddNoteToOrderScreen())),
                 title: 'Add note',
                 svgPath: 'assets/icons/note.svg',
               ),
             ],
+          ),
+          Visibility(
+            visible: Provider.of<OrderProvider>(context).detail.isNotEmpty,
+            child: Text(
+              Provider.of<OrderProvider>(context).detail,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ),
           paddingVertical,
           const Divider(
@@ -406,30 +523,33 @@ class StadiumButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: kBorderRadius,
-        color: scaffoldColor,
-        border: Border.all(
-          color: Colors.grey.withOpacity(0.5),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
         ),
-      ),
-      child: Row(
-        children: [
-          IconSvg(
-            svgPath: svgPath,
-            size: iconSize,
+        decoration: BoxDecoration(
+          borderRadius: kBorderRadius,
+          color: scaffoldColor,
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.5),
           ),
-          smallPaddingHorizontal,
-          Text(
-            title,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
+        ),
+        child: Row(
+          children: [
+            IconSvg(
+              svgPath: svgPath,
+              size: iconSize,
+            ),
+            smallPaddingHorizontal,
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
       ),
     );
   }

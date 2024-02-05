@@ -7,12 +7,23 @@ class OrderProvider extends ChangeNotifier {
   String _address = "";
   String _detail = "";
   int _itemQuantity = 1;
+  double _bagPrice = 0.0;
+  final double _deliveryPrice = 1.0;
+  double _total = 0.0;
 
   String get selectedButton => _selectedButton;
   double get price => _price;
   String get address => _address;
   String get detail => _detail;
   int get itemQuantity => _itemQuantity;
+  double get bagPrice => _bagPrice;
+  double get deliveryPrice => _deliveryPrice;
+  double get total => _total;
+
+  void setBagPrice() {
+    _bagPrice = _price * itemQuantity;
+    _total = _bagPrice + _deliveryPrice;
+  }
 
   void setItemQuantity(int quantity) {
     _itemQuantity = quantity;
@@ -21,12 +32,15 @@ class OrderProvider extends ChangeNotifier {
 
   void increaseItemQuantity() {
     _itemQuantity++;
+    setBagPrice();
+
     notifyListeners();
   }
 
   void decreaseItemQuantity() {
     if (_itemQuantity > 1) {
       _itemQuantity--;
+      setBagPrice();
     }
     notifyListeners();
   }
@@ -38,6 +52,7 @@ class OrderProvider extends ChangeNotifier {
 
   void setDetail(String detail) {
     _detail = detail;
+    print(_detail);
     notifyListeners();
   }
 

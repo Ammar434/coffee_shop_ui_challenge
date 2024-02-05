@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../utils/constants.dart';
-import '../../../../../utils/snackbar.dart';
-import '../../../../../widgets/small_padding.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/snackbar.dart';
+import '../../../widgets/small_padding.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -17,7 +17,9 @@ class CustomAppBar extends StatelessWidget {
       children: [
         LocationWidget(),
         Spacer(),
-        ProfileImage(),
+        ProfileImage(
+          url: 'https://i.imgur.com/uTjWuc8.jpg',
+        ),
       ],
     );
   }
@@ -63,7 +65,9 @@ class LocationWidget extends StatelessWidget {
 class ProfileImage extends StatelessWidget {
   const ProfileImage({
     super.key,
+    required this.url,
   });
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +79,7 @@ class ProfileImage extends StatelessWidget {
         child: ClipRRect(
           borderRadius: kBorderRadius,
           child: Image.network(
-            'https://i.imgur.com/uTjWuc8.jpg',
+            url,
             fit: BoxFit.cover,
           ),
         ),
