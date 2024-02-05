@@ -34,10 +34,10 @@ class _MapWidgetState extends State<MapWidget> with SingleTickerProviderStateMix
     driverLocation = widget.completePath.first;
 
     widget.animationController.addListener(() {
-      if (widget.animationController.value < 0.2) {
+      if (widget.animationController.value < 0.25) {
         widget.mapController.move(home, 18);
       }
-      if (widget.animationController.value > 0.2) {
+      if (widget.animationController.value > 0.25) {
         widget.mapController.move(driverLocation, 18);
       }
 
@@ -54,7 +54,7 @@ class _MapWidgetState extends State<MapWidget> with SingleTickerProviderStateMix
 
   LatLng getAnimatedLocation(double t) {
     int index = (t * (widget.completePath.length - 1)).floor();
-    index = index.clamp(0, widget.completePath.length - 2); // Ensure index is within valid range
+    index = index.clamp(0, widget.completePath.length - 2);
 
     LatLng start = widget.completePath[index];
     LatLng end = widget.completePath[index + 1];
