@@ -61,7 +61,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
         children: [
           MapWidget(
             mapController: mapController,
-            driverToRestaurant: completePath,
+            completePath: completePath,
             restaurantToHome: restaurantToHome,
             animationController: animationController,
           ),

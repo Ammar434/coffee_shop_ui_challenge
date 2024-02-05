@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../provider/delivery_provider.dart';
 
 class CountDown extends StatelessWidget {
   const CountDown({super.key, required this.minuteRemaining, required this.value});
@@ -10,15 +7,27 @@ class CountDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle? textStyle = Theme.of(context).textTheme.titleMedium?.copyWith(
+          color: Colors.black,
+        );
+
     if (value == 1) {
-      return const Text('Go grab your coffee ☕️☕️!');
+      return Text(
+        'Go grab your coffee ☕️☕️!',
+        style: textStyle,
+      );
+    }
+
+    if (minuteRemaining == 0) {
+      return Text(
+        'Less than a minute left',
+        style: textStyle,
+      );
     }
 
     return Text(
-      '${minuteRemaining * 10} minutes left',
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.black,
-          ),
+      '${(minuteRemaining + 1)} minutes left',
+      style: textStyle,
     );
   }
 }

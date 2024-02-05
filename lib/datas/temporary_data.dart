@@ -12,6 +12,22 @@ enum CoffeeCategory {
   frappe,
 }
 
+List<String> url = [
+  " https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/377903/pexels-photo-377903.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/3879495/pexels-photo-3879495.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/4264049/pexels-photo-4264049.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1749303/pexels-photo-1749303.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/3020919/pexels-photo-3020919.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1727123/pexels-photo-1727123.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1627933/pexels-photo-1627933.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/2910874/pexels-photo-2910874.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/4349772/pexels-photo-4349772.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/5464632/pexels-photo-5464632.jpeg?auto=compress&cs=tinysrgb&w=800",
+];
+
 final Map<CoffeeCategory, String> coffeeCategoryNames = {
   CoffeeCategory.cappuccino: 'Cappuccino',
   CoffeeCategory.espresso: 'Espresso',
@@ -39,7 +55,10 @@ List<Ingredient> randomSelect(List<Ingredient> list) {
   return newList;
 }
 
-const String temporaryUrl = "https://coffee.alexflipnote.dev/random";
+String randomSelectString(List<String> list) {
+  int index = Random().nextInt(list.length);
+  return list[index];
+}
 
 List<Coffee> cappuchinoCoffeeList = [
   Coffee(
@@ -47,8 +66,9 @@ List<Coffee> cappuchinoCoffeeList = [
     name: 'Classic Cappuccino',
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
-    description: "Indulge in the classic flavor of our Cappuccino. Crafted with rich espresso, steamed milk, and a touch of frothed milk, this coffee offers a creamy and satisfying experience.",
-    imageUrl: temporaryUrl,
+    description:
+        "Indulge in the timeless elegance of our Classic Cappuccino. Crafted with a perfect balance of rich espresso, carefully steamed milk, and a velvety touch of frothed milk, this coffee offers a creamy and satisfying experience. The combination of high-quality ingredients results in a classic cappuccino that's rich, smooth, and authentically delightful. Perfect for those who appreciate the simplicity and authenticity of a classic cappuccino.",
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 4.0,
   ),
@@ -57,8 +77,9 @@ List<Coffee> cappuchinoCoffeeList = [
     name: 'Velvet Delight Cappuccino',
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
-    description: "Experience the smoothness of our Velvet Delight Cappuccino. Featuring a velvety blend of espresso, silky steamed milk, and frothed milk, this coffee provides a luxurious taste.",
-    imageUrl: temporaryUrl,
+    description:
+        "Immerse yourself in the luxurious smoothness of our Velvet Delight Cappuccino. This exquisite blend features a velvety combination of finely brewed espresso, silky steamed milk, and a luscious froth that creates a truly indulgent and satisfying taste. The result is a cappuccino experience that goes beyond expectations, providing a velvety texture and rich flavor. Elevate your coffee experience with a touch of Velvet Delight.",
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.2,
   ),
@@ -68,8 +89,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Savor the sweetness of our Caramel Bliss Cappuccino. Infused with caramel syrup, this delightful blend of espresso, steamed milk, and frothed milk creates a caramel-infused coffee experience.",
-    imageUrl: temporaryUrl,
+        "Savor the sweetness of our Caramel Bliss Cappuccino. Infused with luscious caramel syrup, this delightful blend of freshly brewed espresso, expertly steamed milk, and a rich froth creates a caramel-infused coffee experience that is both indulgent and comforting. The caramel adds a layer of complexity to the flavor profile, providing a perfect balance of sweetness and coffee richness. Treat yourself to the blissful taste of caramel in every sip.",
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.5,
   ),
@@ -79,8 +100,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Elevate your taste buds with our Hazelnut Elegance Cappuccino. Featuring the rich flavor of hazelnut, combined with espresso, steamed milk, and frothed milk, this coffee provides an elegant and nutty experience.",
-    imageUrl: temporaryUrl,
+        "Elevate your taste buds with our Hazelnut Elegance Cappuccino. Immerse yourself in the rich and nutty flavor of premium hazelnuts, perfectly blended with finely brewed espresso, velvety steamed milk, and a luxurious froth. This coffee provides an elegant and indulgent experience, perfect for those who appreciate a sophisticated twist to their cappuccino. Hazelnut Elegance is more than a drink; it's a sensory journey.",
+    imageUrl: randomSelectString(url),
     rating: 4.7,
     price: 4.8,
   ),
@@ -90,8 +111,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Discover the perfect balance of chocolate and coffee in our Mocha Harmony Cappuccino. Blending espresso, steamed milk, frothed milk, and chocolate, this coffee creates a harmonious and indulgent flavor.",
-    imageUrl: temporaryUrl,
+        "Discover the perfect harmony of chocolate and coffee in our Mocha Harmony Cappuccino. This exquisite blend features a careful balance of finely brewed espresso, velvety steamed milk, a rich froth, and decadent chocolate. The result is a harmonious and indulgent flavor profile that combines the best of both worlds. Indulge your senses in the symphony of mocha goodness with every sip of Mocha Harmony.",
+    imageUrl: randomSelectString(url),
     rating: 4.4,
     price: 4.3,
   ),
@@ -101,8 +122,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Escape to a world of sweetness with our Vanilla Dream Cappuccino. Infused with vanilla syrup, this blend of espresso, steamed milk, and frothed milk offers a dreamy and aromatic experience.",
-    imageUrl: temporaryUrl,
+        "Escape to a world of sweetness with our Vanilla Dream Cappuccino. Infused with the delightful aroma of vanilla syrup, this blend of finely brewed espresso, velvety steamed milk, and a rich froth offers a dreamy and aromatic experience. Let the essence of vanilla transport you to a world of flavor and delight, making every sip of Vanilla Dream a moment of pure indulgence.",
+    imageUrl: randomSelectString(url),
     rating: 4.0,
     price: 3.9,
   ),
@@ -112,8 +133,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Warm up your senses with our Cinnamon Spice Cappuccino. Infused with cinnamon flavor, this delightful blend of espresso, steamed milk, and frothed milk creates a spicy and comforting coffee experience.",
-    imageUrl: temporaryUrl,
+        "Warm up your senses with our Cinnamon Spice Cappuccino. Infused with the comforting and spicy flavor of cinnamon, this delightful blend of finely brewed espresso, velvety steamed milk, and a rich froth creates a unique and comforting coffee experience. Embrace the warmth and spice with every sip, making Cinnamon Spice the perfect choice for those seeking a cozy and aromatic cappuccino.",
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 4.0,
   ),
@@ -123,8 +144,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Experience the richness of our Irish Cream Cappuccino. Infused with the flavor of Irish cream, this blend of espresso, steamed milk, and frothed milk offers a smooth and delightful coffee experience.",
-    imageUrl: temporaryUrl,
+        "Experience the richness of our Irish Cream Cappuccino. Infused with the smooth and delightful flavor of authentic Irish cream, this blend of finely brewed espresso, velvety steamed milk, and a luxurious froth offers a velvety and sophisticated coffee experience. Indulge in the luxurious taste of Irish cream with every sip, making Irish Cream Cappuccino the perfect choice for those seeking a rich and smooth coffee indulgence.",
+    imageUrl: randomSelectString(url),
     rating: 4.6,
     price: 4.4,
   ),
@@ -134,8 +155,8 @@ List<Coffee> cappuchinoCoffeeList = [
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
     description:
-        "Escape to the tropics with our Coconut Bliss Cappuccino. Infused with coconut flavor, this blend of espresso, steamed milk, and frothed milk offers a tropical and refreshing coffee experience.",
-    imageUrl: temporaryUrl,
+        "Escape to the tropics with our Coconut Bliss Cappuccino. Infused with the exotic flavor of coconut, this blend of finely brewed espresso, velvety steamed milk, and a rich froth offers a tropical and refreshing coffee experience. Let the coconut bliss transport you to a beachside paradise with every sip, making Coconut Bliss Cappuccino the perfect choice for those seeking a delicious and invigorating coffee escape.",
+    imageUrl: randomSelectString(url),
     rating: 4.1,
     price: 4.2,
   ),
@@ -144,21 +165,22 @@ List<Coffee> cappuchinoCoffeeList = [
     name: 'Spiced Chai Cappuccino',
     category: CoffeeCategory.cappuccino,
     ingredients: randomSelect(ingredientList),
-    description: "Warm up with our Spiced Chai Cappuccino. Infused with chai spices, this blend of espresso, steamed milk, and frothed milk creates a spiced and aromatic coffee experience.",
-    imageUrl: temporaryUrl,
+    description:
+        "Warm up with our Spiced Chai Cappuccino. Infused with the aromatic spices of chai, this blend of finely brewed espresso, velvety steamed milk, and a rich froth creates a spiced and comforting coffee experience. Embrace the warmth and complexity of chai with every sip, making Spiced Chai Cappuccino the perfect choice for those seeking a soothing and aromatic cappuccino.",
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.1,
   ),
 ];
-
 List<Coffee> espressocoffeeList = [
   Coffee(
     review: Random().nextInt(1000),
     name: 'Classic Espresso',
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
-    description: "Savor the pure essence of our Classic Espresso. This intense and concentrated coffee shot delivers a bold and rich flavor that espresso enthusiasts crave.",
-    imageUrl: temporaryUrl,
+    description:
+        "Savor the pure essence of our Classic Espresso. This intense and concentrated coffee shot delivers a bold and rich flavor that espresso enthusiasts crave. Carefully crafted with high-quality espresso beans, the Classic Espresso is a testament to the art of espresso making. Experience the robust notes and full-bodied profile that make this espresso a timeless favorite among coffee connoisseurs.",
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 3.5,
   ),
@@ -167,8 +189,9 @@ List<Coffee> espressocoffeeList = [
     name: 'Double Shot Espresso',
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
-    description: "For an extra kick, try our Double Shot Espresso. Two shots of pure espresso deliver a powerful and invigorating coffee experience that will awaken your senses.",
-    imageUrl: temporaryUrl,
+    description:
+        "For an extra kick, try our Double Shot Espresso. Two shots of pure espresso deliver a powerful and invigorating coffee experience that will awaken your senses. This bold and energizing espresso is perfect for those who seek a stronger and more intense coffee flavor. With a higher caffeine content, the Double Shot Espresso is a go-to choice for those in need of a robust pick-me-up.",
+    imageUrl: randomSelectString(url),
     rating: 4.7,
     price: 4.0,
   ),
@@ -177,8 +200,9 @@ List<Coffee> espressocoffeeList = [
     name: 'Espresso Macchiato',
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
-    description: "Experience the simplicity of our Espresso Macchiato. A shot of espresso with just a hint of frothed milk creates a perfect balance of boldness and creaminess.",
-    imageUrl: temporaryUrl,
+    description:
+        "Experience the simplicity of our Espresso Macchiato. A shot of espresso with just a hint of frothed milk creates a perfect balance of boldness and creaminess. The Espresso Macchiato is a delightful choice for those who appreciate the essence of espresso but enjoy a touch of velvety smoothness. Each sip offers a harmonious blend of intense coffee flavor and a subtle creaminess, making it a timeless classic.",
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 3.8,
   ),
@@ -187,8 +211,9 @@ List<Coffee> espressocoffeeList = [
     name: 'Caramel Infusion Espresso',
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
-    description: "Indulge in the sweetness of our Caramel Infusion Espresso. A drizzle of caramel enhances the rich and intense flavor of the espresso, creating a delightful coffee treat.",
-    imageUrl: temporaryUrl,
+    description:
+        "Indulge in the sweetness of our Caramel Infusion Espresso. A drizzle of caramel enhances the rich and intense flavor of the espresso, creating a delightful coffee treat. The Caramel Infusion Espresso is a perfect harmony of sweetness and boldness, offering a decadent and satisfying coffee experience. Treat yourself to this indulgent blend that combines the richness of espresso with the sweet allure of caramel.",
+    imageUrl: randomSelectString(url),
     rating: 4.4,
     price: 4.2,
   ),
@@ -197,8 +222,9 @@ List<Coffee> espressocoffeeList = [
     name: 'Vanilla Bliss Espresso',
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
-    description: "Escape to bliss with our Vanilla Bliss Espresso. Infused with vanilla notes, this espresso shot offers a smooth and aromatic coffee experience for vanilla lovers.",
-    imageUrl: temporaryUrl,
+    description:
+        "Escape to bliss with our Vanilla Bliss Espresso. Infused with vanilla notes, this espresso shot offers a smooth and aromatic coffee experience for vanilla lovers. The Vanilla Bliss Espresso combines the boldness of espresso with the subtle sweetness of vanilla, creating a delightful fusion of flavors. Indulge in the smooth and aromatic richness of this espresso that brings a touch of bliss to your coffee routine.",
+    imageUrl: randomSelectString(url),
     rating: 4.1,
     price: 3.9,
   ),
@@ -208,8 +234,8 @@ List<Coffee> espressocoffeeList = [
     category: CoffeeCategory.espresso,
     ingredients: randomSelect(ingredientList),
     description:
-        "Indulge in the richness of our Dark Chocolate Espresso. A hint of dark chocolate complements the robust flavor of the espresso, creating a decadent and satisfying coffee indulgence.",
-    imageUrl: temporaryUrl,
+        "Indulge in the richness of our Dark Chocolate Espresso. A hint of dark chocolate complements the robust flavor of the espresso, creating a decadent and satisfying coffee indulgence. The Dark Chocolate Espresso is a treat for those who appreciate the marriage of bold coffee and velvety dark chocolate. Each sip delivers a harmonious blend of intense espresso and the luxurious depth of dark chocolate, making it a perfect choice for a truly indulgent experience.",
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.0,
   ),
@@ -222,7 +248,7 @@ List<Coffee> americanoCoffeeList = [
     category: CoffeeCategory.americano,
     ingredients: randomSelect(ingredientList),
     description: "Enjoy the timeless taste of our Classic Americano. Made with pure espresso and hot water, this coffee offers a bold and invigorating experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 3.8,
   ),
@@ -232,7 +258,7 @@ List<Coffee> americanoCoffeeList = [
     category: CoffeeCategory.americano,
     ingredients: randomSelect(ingredientList),
     description: "Experience the richness of our Bold Black Americano. Crafted with intense espresso and hot water, this coffee delivers a strong and robust flavor.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.2,
   ),
@@ -242,7 +268,7 @@ List<Coffee> americanoCoffeeList = [
     category: CoffeeCategory.americano,
     ingredients: randomSelect(ingredientList),
     description: "Indulge in the smoothness of our Americano Blend. Blending premium espresso with hot water, this coffee offers a delightful and balanced taste.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.0,
     price: 3.5,
   ),
@@ -252,7 +278,7 @@ List<Coffee> americanoCoffeeList = [
     category: CoffeeCategory.americano,
     ingredients: randomSelect(ingredientList),
     description: "Start your day with the freshness of our Crisp Morning Americano. Featuring high-quality espresso and hot water, this coffee provides a crisp and awakening flavor.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 3.9,
   ),
@@ -262,20 +288,20 @@ List<Coffee> americanoCoffeeList = [
     category: CoffeeCategory.americano,
     ingredients: randomSelect(ingredientList),
     description: "Experience the warmth of our Golden Sunrise Americano. Crafted with love and the perfect blend of espresso and hot water, this coffee brings a golden touch to your mornings.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.8,
     price: 4.5,
   ),
 ];
-
 List<Coffee> macchiatoCoffeeList = [
   Coffee(
     review: Random().nextInt(1000),
     name: 'Classic Macchiato',
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
-    description: "Savor the simplicity of our Classic Macchiato. A perfect balance of espresso and a dollop of frothed milk, creating a delightful and lightly creamy coffee experience.",
-    imageUrl: temporaryUrl,
+    description:
+        "Savor the simplicity of our Classic Macchiato. A perfect balance of finely brewed espresso and a dollop of frothed milk creates a delightful and lightly creamy coffee experience. The Classic Macchiato is a timeless choice for those who appreciate the pure essence of espresso complemented by a subtle touch of velvety frothed milk. Indulge in the art of simplicity with every sip.",
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 3.8,
   ),
@@ -284,8 +310,9 @@ List<Coffee> macchiatoCoffeeList = [
     name: 'Caramel Drizzle Macchiato',
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
-    description: "Indulge in the sweetness of our Caramel Drizzle Macchiato. A drizzle of caramel enhances the rich espresso and frothed milk, creating a deliciously caramel-infused coffee treat.",
-    imageUrl: temporaryUrl,
+    description:
+        "Indulge in the sweetness of our Caramel Drizzle Macchiato. A generous drizzle of caramel enhances the rich espresso and frothed milk, creating a deliciously caramel-infused coffee treat. The Caramel Drizzle Macchiato is a delightful fusion of bold espresso, creamy frothed milk, and sweet caramel notes. Treat yourself to this indulgent macchiato that combines the best of both worlds.",
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.0,
   ),
@@ -294,8 +321,9 @@ List<Coffee> macchiatoCoffeeList = [
     name: 'Vanilla Harmony Macchiato',
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
-    description: "Experience the harmony of flavors in our Vanilla Harmony Macchiato. Infused with vanilla, the blend of espresso and frothed milk offers a smooth and aromatic coffee indulgence.",
-    imageUrl: temporaryUrl,
+    description:
+        "Experience the harmony of flavors in our Vanilla Harmony Macchiato. Infused with the subtle sweetness of vanilla, the blend of finely brewed espresso and frothed milk offers a smooth and aromatic coffee indulgence. The Vanilla Harmony Macchiato is a delightful symphony of bold coffee and velvety vanilla, creating a perfect balance for those who seek a harmonious and aromatic macchiato experience.",
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.2,
   ),
@@ -305,8 +333,8 @@ List<Coffee> macchiatoCoffeeList = [
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
     description:
-        "Elevate your senses with our Hazelnut Bliss Macchiato. Featuring the rich flavor of hazelnut, this macchiato combines espresso and frothed milk for a nutty and delightful coffee experience.",
-    imageUrl: temporaryUrl,
+        "Elevate your senses with our Hazelnut Bliss Macchiato. Featuring the rich and nutty flavor of hazelnut, this macchiato combines finely brewed espresso and frothed milk for a nutty and delightful coffee experience. The Hazelnut Bliss Macchiato is a perfect choice for those who appreciate the luxurious combination of espresso and hazelnut, providing a nutty twist to the classic macchiato.",
+    imageUrl: randomSelectString(url),
     rating: 4.7,
     price: 4.5,
   ),
@@ -315,8 +343,9 @@ List<Coffee> macchiatoCoffeeList = [
     name: 'Coconut Dream Macchiato',
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
-    description: "Escape to a tropical dream with our Coconut Dream Macchiato. Infused with coconut, this macchiato blends espresso and frothed milk for a refreshing and exotic coffee treat.",
-    imageUrl: temporaryUrl,
+    description:
+        "Escape to a tropical dream with our Coconut Dream Macchiato. Infused with the exotic flavor of coconut, this macchiato blends finely brewed espresso and frothed milk for a refreshing and exotic coffee treat. The Coconut Dream Macchiato offers a taste of the tropics with every sip, providing a delightful escape for coconut lovers seeking a unique and invigorating macchiato experience.",
+    imageUrl: randomSelectString(url),
     rating: 4.0,
     price: 3.9,
   ),
@@ -325,8 +354,9 @@ List<Coffee> macchiatoCoffeeList = [
     name: 'Mocha Indulgence Macchiato',
     category: CoffeeCategory.macchiato,
     ingredients: randomSelect(ingredientList),
-    description: "Indulge in the richness of our Mocha Indulgence Macchiato. A perfect blend of chocolate, espresso, and frothed milk creates a decadent and satisfying coffee experience.",
-    imageUrl: temporaryUrl,
+    description:
+        "Indulge in the richness of our Mocha Indulgence Macchiato. A perfect blend of premium chocolate, finely brewed espresso, and frothed milk creates a decadent and satisfying coffee experience. The Mocha Indulgence Macchiato is a delightful fusion of bold coffee and indulgent chocolate, providing a luscious treat for those who seek a truly satisfying and decadent macchiato.",
+    imageUrl: randomSelectString(url),
     rating: 4.4,
     price: 4.3,
   ),
@@ -339,7 +369,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Indulge in the classic taste of our Classic Latte. A perfect blend of espresso and steamed milk creates a smooth and creamy coffee experience that is sure to delight your senses.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 3.8,
   ),
@@ -349,7 +379,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Satisfy your sweet cravings with our Caramel Swirl Latte. A swirl of caramel, espresso, and steamed milk creates a delightful and indulgent coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.0,
   ),
@@ -359,7 +389,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Experience the richness of our Vanilla Bean Latte. Infused with real vanilla beans, this latte combines espresso and steamed milk for a luxurious and aromatic coffee indulgence.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.2,
   ),
@@ -370,7 +400,7 @@ List<Coffee> latteCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Elevate your senses with our Hazelnut Heaven Latte. Featuring the rich flavor of hazelnut, this latte combines espresso and steamed milk for a nutty and delightful coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.7,
     price: 4.5,
   ),
@@ -380,7 +410,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Escape to a tropical paradise with our Coconut Cream Latte. Infused with coconut, this latte combines espresso and steamed milk for a refreshing and exotic coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.0,
     price: 3.9,
   ),
@@ -391,7 +421,7 @@ List<Coffee> latteCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Indulge in the delightful combination of chocolate and coffee with our Mocha Delight Latte. A perfect blend of chocolate, espresso, and steamed milk creates a decadent and satisfying coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.4,
     price: 4.3,
   ),
@@ -402,7 +432,7 @@ List<Coffee> latteCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Experience the smoothness of our Irish Cream Latte. Infused with the flavor of Irish cream, this latte combines espresso and steamed milk for a delightful and creamy coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.6,
     price: 4.4,
   ),
@@ -412,7 +442,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Indulge in the sweetness of our Cinnamon Roll Latte. Infused with cinnamon flavor, this latte combines espresso and steamed milk for a comforting and aromatic coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 4.0,
   ),
@@ -422,7 +452,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Enjoy the perfect balance of sweet and salty with our Salted Caramel Latte. A touch of salted caramel enhances the espresso and steamed milk for a delicious coffee indulgence.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.8,
     price: 4.5,
   ),
@@ -433,7 +463,7 @@ List<Coffee> latteCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Experience the warmth of fall with our Maple Pecan Latte. Infused with maple and pecan flavors, this latte combines espresso and steamed milk for a cozy and comforting coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.1,
     price: 4.2,
   ),
@@ -443,7 +473,7 @@ List<Coffee> latteCoffeeList = [
     category: CoffeeCategory.latte,
     ingredients: randomSelect(ingredientList),
     description: "Indulge in the flavors of almond, coconut, and chocolate with our Almond Joy Latte. This latte combines espresso and steamed milk for a delightful and indulgent coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.1,
   ),
@@ -454,7 +484,7 @@ List<Coffee> latteCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Get into the holiday spirit with our Peppermint Mocha Latte. Infused with peppermint and chocolate, this latte combines espresso and steamed milk for a festive and flavorful coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.3,
   ),
@@ -467,7 +497,7 @@ List<Coffee> frappeCoffeeList = [
     category: CoffeeCategory.frappe,
     ingredients: randomSelect(ingredientList),
     description: "Cool down with the classic taste of our Classic Frappé. A delightful blend of espresso, ice, and creamy goodness creates a refreshing and icy coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 4.0,
   ),
@@ -478,7 +508,7 @@ List<Coffee> frappeCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Indulge in the madness of chocolate and coffee with our Mocha Madness Frappé. A perfect blend of chocolate, espresso, ice, and creamy goodness creates a decadent and satisfying frozen coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.5,
     price: 4.2,
   ),
@@ -488,7 +518,7 @@ List<Coffee> frappeCoffeeList = [
     category: CoffeeCategory.frappe,
     ingredients: randomSelect(ingredientList),
     description: "Satisfy your sweet tooth with our Caramel Crunch Frappé. A swirl of caramel, ice, and creamy goodness creates a delightful and crunchy frozen coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.3,
     price: 4.5,
   ),
@@ -499,7 +529,7 @@ List<Coffee> frappeCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Experience the richness of our Vanilla Bean Frappé. Infused with real vanilla beans, this frozen delight combines espresso, ice, and creamy goodness for a luxurious and aromatic coffee treat.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.7,
     price: 4.8,
   ),
@@ -510,7 +540,7 @@ List<Coffee> frappeCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Escape to a tropical bliss with our Coconut Bliss Frappé. Infused with coconut, this frozen treat combines espresso, ice, and creamy goodness for a refreshing and exotic coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.0,
     price: 3.9,
   ),
@@ -521,7 +551,7 @@ List<Coffee> frappeCoffeeList = [
     ingredients: randomSelect(ingredientList),
     description:
         "Indulge in the delightful sweetness of our Strawberry Delight Frappé. Made with fresh strawberries, ice, and creamy goodness, this frozen treat offers a fruity and refreshing coffee experience.",
-    imageUrl: temporaryUrl,
+    imageUrl: randomSelectString(url),
     rating: 4.2,
     price: 4.0,
   ),

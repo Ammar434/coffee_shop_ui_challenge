@@ -1,4 +1,4 @@
-import 'package:coffe_shop_ui_challenge/utils/custom_bottom_navigation_bar.dart';
+import 'package:coffe_shop_ui_challenge/widgets/custom_bottom_navigation_bar.dart';
 import 'acceuil/acceuil_screen.dart';
 import '../widgets/pending.dart';
 import 'package:flutter/material.dart';

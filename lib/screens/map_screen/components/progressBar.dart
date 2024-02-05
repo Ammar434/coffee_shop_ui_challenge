@@ -77,8 +77,6 @@ class AnimatedContainerSwitcher extends StatefulWidget {
 }
 
 class _AnimatedContainerSwitcherState extends State<AnimatedContainerSwitcher> {
-  final List<Color> _colors = [Colors.red, Colors.green, Colors.blue, Colors.yellow];
-
   String getTitle() {
     if (widget.controller.value <= 0.25) {
       return "Searching";
@@ -150,42 +148,44 @@ class OrderStatus extends StatelessWidget {
           color: dividerColor,
         ),
       ),
-      child: Row(children: [
-        Container(
-          height: 80.sp,
-          width: 80.sp,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(kRadius),
-            border: Border.all(
-              color: dividerColor,
+      child: Row(
+        children: [
+          Container(
+            height: 80.sp,
+            width: 80.sp,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(kRadius),
+              border: Border.all(
+                color: dividerColor,
+              ),
+            ),
+            child: IconSvg(
+              svgPath: "assets/icons/delivery.svg",
+              color: primaryColor,
+              size: 40.sp,
             ),
           ),
-          child: IconSvg(
-            svgPath: "assets/icons/delivery.svg",
-            color: primaryColor,
-            size: 40.sp,
+          paddingHorizontal,
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
+                ),
+                smallPaddingVertical,
+                Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black),
+                ),
+              ],
+            ),
           ),
-        ),
-        paddingHorizontal,
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.black),
-              ),
-              smallPaddingVertical,
-              Text(
-                subtitle,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black),
-              ),
-            ],
-          ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

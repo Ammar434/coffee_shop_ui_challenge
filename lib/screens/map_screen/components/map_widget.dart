@@ -1,26 +1,24 @@
 import 'dart:ui';
-
+import 'package:coffe_shop_ui_challenge/screens/map_screen/components/marker_layer.dart';
+import 'package:coffe_shop_ui_challenge/screens/map_screen/components/polyline_layer.dart';
+import 'package:coffe_shop_ui_challenge/screens/map_screen/components/tile_layer_widget.dart';
 import 'package:coffe_shop_ui_challenge/screens/map_screen/map_screen.dart';
-import 'package:coffe_shop_ui_challenge/utils/colors.dart';
-import 'package:coffe_shop_ui_challenge/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:latlong2/latlong.dart';
-
 import '../../../datas/temporary_map_data.dart';
 
 class MapWidget extends StatefulWidget {
   const MapWidget({
     super.key,
     required this.mapController,
-    required this.driverToRestaurant,
+    required this.completePath,
     required this.restaurantToHome,
     required this.animationController,
   });
 
   final MapController mapController;
-  final List<LatLng> driverToRestaurant;
+  final List<LatLng> completePath;
   final List<LatLng> restaurantToHome;
   final AnimationController animationController;
   @override
@@ -33,7 +31,7 @@ class _MapWidgetState extends State<MapWidget> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    driverLocation = widget.driverToRestaurant.first;
+    driverLocation = widget.completePath.first;
 
     widget.animationController.addListener(() {
       if (widget.animationController.value < 0.2) {
@@ -50,17 +48,17 @@ class _MapWidgetState extends State<MapWidget> with SingleTickerProviderStateMix
 
     widget.animationController.duration = const Duration(
       seconds: animationDurationInSeconds,
-    ); // Set your desired duration here
+    );
     widget.animationController.forward();
   }
 
   LatLng getAnimatedLocation(double t) {
-    int index = (t * (widget.driverToRestaurant.length - 1)).floor();
-    index = index.clamp(0, widget.driverToRestaurant.length - 2); // Ensure index is within valid range
+    int index = (t * (widget.completePath.length - 1)).floor();
+    index = index.clamp(0, widget.completePath.length - 2); // Ensure index is within valid range
 
-    LatLng start = widget.driverToRestaurant[index];
-    LatLng end = widget.driverToRestaurant[index + 1];
-    double localT = t * (widget.driverToRestaurant.length - 1) - index;
+    LatLng start = widget.completePath[index];
+    LatLng end = widget.completePath[index + 1];
+    double localT = t * (widget.completePath.length - 1) - index;
 
     double lat = lerpDouble(start.latitude, end.latitude, localT)!;
     double lng = lerpDouble(start.longitude, end.longitude, localT)!;
@@ -79,83 +77,16 @@ class _MapWidgetState extends State<MapWidget> with SingleTickerProviderStateMix
         minZoom: 16,
       ),
       children: [
-        TileLayer(
-          urlTemplate: mapTileUrl,
+        const TileLayerWidget(urlTemplate: mapTileUrl),
+        PolylineLayerWidget(
+          driverToRestaurant: driverToRestaurant,
+          restaurantToHome: widget.restaurantToHome,
+          animationController: widget.animationController,
         ),
-        PolylineLayer(
-          polylines: [
-            if (widget.animationController.value < 0.6)
-              Polyline(
-                points: widget.driverToRestaurant,
-                strokeWidth: 4.0,
-                isDotted: true,
-                color: Colors.black,
-              ),
-            if (widget.animationController.value > 0.6)
-              Polyline(
-                points: widget.restaurantToHome,
-                color: primaryColor,
-                strokeWidth: 4.0,
-              ),
-          ],
+        MarkerLayerWidget(
+          driverLocation: driverLocation,
         ),
-        MarkerLayer(
-          markers: [
-            Marker(
-              width: 40.sp,
-              height: 40.sp,
-              point: driverLocation,
-              child: const RoundedIcon(
-                icon: Icons.motorcycle,
-              ),
-            ),
-            Marker(
-              width: 40.sp,
-              height: 40.sp,
-              point: restaurant,
-              //Circle icon
-              child: const RoundedIcon(
-                icon: Icons.coffee,
-              ),
-            ),
-            Marker(
-              width: 40.sp,
-              height: 40.sp,
-              point: home,
-              child: const RoundedIcon(
-                icon: Icons.home,
-              ),
-            ),
-          ],
-        )
       ],
-    );
-  }
-}
-
-class RoundedIcon extends StatelessWidget {
-  const RoundedIcon({
-    super.key,
-    required this.icon,
-  });
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: primaryColor,
-        border: Border.all(
-          color: Colors.white,
-        ),
-      ),
-      child: Center(
-        child: Icon(
-          icon,
-          color: Colors.white,
-        ),
-      ),
     );
   }
 }

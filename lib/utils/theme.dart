@@ -1,13 +1,7 @@
-import 'package:coffe_shop_ui_challenge/datas/temporary_map_data.dart';
 import 'package:coffe_shop_ui_challenge/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'colors.dart';
-import 'constants.dart';
 
 TextTheme textTheme() {
   return TextTheme(

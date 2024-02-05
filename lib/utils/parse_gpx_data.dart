@@ -1,9 +1,6 @@
-import 'dart:io';
 
-import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:xml/xml.dart';
-import 'package:path/path.dart' as p;
 
 List<LatLng> parseGpxToLatLngList(String gpxData) {
   // File gpxFile = File(path);
