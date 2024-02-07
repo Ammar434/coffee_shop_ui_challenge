@@ -40,7 +40,7 @@ class PaymentSummary extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Price",
+                    "Delivery fee",
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const Spacer(),
